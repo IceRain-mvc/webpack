@@ -16,10 +16,10 @@ let TerserJsPlugin = require('terser-webpack-plugin');
 
 let path = require('path');
 module.exports = {
-  mode: 'production',
+  mode: 'development',
 
   optimization: {//webpack 4.0之后出现的优化项
-    minimizer: [new OptimizeCss(),new TerserJsPlugin()]//压缩css 注意 生产环境
+    minimizer: [new OptimizeCss(), new TerserJsPlugin()]//压缩css 注意 生产环境
   },
 
   devServer: {
@@ -44,9 +44,28 @@ module.exports = {
   * style-loader : 把style插入到 head中
   * css-loader : 把css模块 插入到 中 js
   *
+  *
+  * plugins
+  * @babel/preset-env es6转换成es5
+  * @babel/plugin-proposal-class-properties: 将es7转换成es5
+  *
   * */
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],//转化es6的话
+            plugins: [
+              ["@babel/plugin-proposal-decorators", {"legacy": true}],//装饰方法
+              ["@babel/plugin-proposal-class-properties", {"loose": true}]//装饰类 loose: 宽松模式
+            ]
+          },
+        }]
+
+      },
       {
         test: /\.css$/,
         use: [{
