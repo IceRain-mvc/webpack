@@ -14,12 +14,17 @@
     "@babel/core": "^7.8.3",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
+    "@babel/runtime": "^7.8.3",
     "autoprefixer": "^9.7.4",
+    "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.4.2",
+    "expose-loader": "^0.7.5",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^8.0.2",
@@ -30,7 +35,6 @@
     "webpack-dev-server": "^3.10.1"
   },
   "dependencies": {
-    "babel-loader": "^8.0.6",
-    "node-sass": "^4.13.0"
+    "jquery": "^3.4.1"
   }
 }

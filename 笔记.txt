@@ -1,0 +1,30 @@
+
+装饰器
+
+webpack优化项之 公共方法的抽离
+1:下包 @babel/plugin-transform-runtime  @babel/runtime
+2:
+ plugins: [
+                ["@babel/plugin-proposal-decorators", {"legacy": true}],
+                ["@babel/plugin-proposal-class-properties", {"loose": true}],
+                "@babel/plugin-transform-runtime"
+              ]
+
+3:
+  include: path.resolve(__dirname, 'src'),
+  exclude: /node_modules/
+
+
+webpack的优化项之 处理全局变量 不会重复打包
+let query = require('jquery')
+
+#('').addClass().css({height:'200px'}).attr({href:"http://..."})
+
+
+
+
+
+
+
+
+

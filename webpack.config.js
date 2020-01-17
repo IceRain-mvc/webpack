@@ -14,6 +14,8 @@ let OptimizeCss = require('optimize-css-assets-webpack-plugin');
 //解决压缩css js不被压缩的问题
 let TerserJsPlugin = require('terser-webpack-plugin');
 
+let webpack = require('webpack');
+
 let path = require('path');
 module.exports = {
   mode: 'development',
@@ -52,6 +54,11 @@ module.exports = {
   * */
   module: {
     rules: [
+      {//内置loader
+        test: require.resolve('jquery'),
+        use: 'expose-loader?$'
+      }
+      ,
       {
         test: /\.js$/,
         use: [{
@@ -60,10 +67,14 @@ module.exports = {
             presets: ['@babel/preset-env'],//转化es6的话
             plugins: [
               ["@babel/plugin-proposal-decorators", {"legacy": true}],//装饰方法
-              ["@babel/plugin-proposal-class-properties", {"loose": true}]//装饰类 loose: 宽松模式
+              ["@babel/plugin-proposal-class-properties", {"loose": true}],//装饰类 loose: 宽松模式
+              '@babel/plugin-transform-runtime'
             ]
           },
-        }]
+        }],
+        include: path.resolve(__dirname, 'src'),//抽离哪个包
+        exclude: /node_modules/  //排除哪个包
+
 
       },
       {
@@ -96,7 +107,14 @@ module.exports = {
       filename: 'main.css',
       // chunkFilename:'[id].css'
     }),
+    //提供者
+    new webpack.ProvidePlugin({
+      "$": "jquery"
+    })
+  ],
 
-
-  ]
+  //排除之外  加入 在cdn引入了这个包 就不会打包这个包
+  externals: {
+    'jquery': '$'
+  }
 };
